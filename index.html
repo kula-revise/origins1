@@ -908,6 +908,19 @@ body.dark .story-b .story-num { color: #96C0E6 !important; }
   .top-meta { padding-right: 9.5rem; }
 }
 
+
+/* ---- The wrong-answer glyph clears 4.5 on the dark ground -----
+   --a1 measured 3.76 against the wrong-option tint once the rgba
+   is composited. The tick and the cross are what carry the state
+   for a learner who cannot separate the two hues, so the glyph
+   has to be legible on its own. 5.57 after this.
+   -------------------------------------------------------------- */
+body.dark .option.wrong .opt-letter, body.dark .option.wrong .opt-mark,
+body.dark .option-btn.wrong .opt-letter, body.dark .option-btn.wrong .opt-mark,
+body.dark .inter-item.no .inter-mark, body.dark .inter-item.no .rank {
+  color: #EFA79E !important;
+}
+
 </style>
 </head>
 <body class="dark">
@@ -976,51 +989,47 @@ const RESULTS = {
 const FLOW = [
   {
     "type": "story",
-    "marker": "The plan",
-    "markerLabel": "Somewhere you know &middot; the week before",
+    "marker": "One line, two meanings",
+    "markerLabel": "The Atlantic &middot; August 1941",
     "lines": [
       {
-        "mark": "Wednesday",
-        "text": "Three of you want three different things on Saturday. Nobody will move."
+        "text": "Two leaders meet on warships off Newfoundland and put their names to eight points."
       },
       {
-        "mark": "Thursday",
-        "text": "You land on a sentence everyone can live with. You will sort it out on the day."
+        "text": "Point three says they respect **the right of all peoples to choose the form of government** under which they will live."
       },
       {
-        "mark": "Friday",
-        "text": "Each of you tells someone at home a completely different plan for Saturday."
+        "text": "Roosevelt takes that to mean every people on earth, including the ones Britain rules."
       },
       {
-        "mark": "Saturday",
-        "text": "All three of you turn up expecting a different day."
+        "text": "Churchill tells the Commons a month later that it means the countries Hitler has occupied, and nothing more."
       },
       {
-        "text": "**Nobody lied. Nobody agreed either.**"
+        "text": "**Neither of them misread it.**"
       },
       {
-        "text": "You have signed things like that before. Now put three leaders and half of Europe on the table."
+        "text": "Four years later the same two men sit down with Stalin to settle who governs Poland."
       }
     ]
   },
   {
     "type": "question",
     "kind": "instinct",
-    "q": "What would settle what Saturday was supposed to be?",
+    "q": "What would settle what that line actually promised?",
     "options": [
-      "Reading the sentence back slowly with all three of you there",
-      "Asking each of you what you remember wanting on the Wednesday",
-      "Nothing will, because the sentence was left vague so everyone would agree",
-      "Checking what the three of you have done on the last few Saturdays"
+      "Asking Roosevelt, because the words were drafted on his own ship",
+      "Asking Churchill, because he was the one who explained it publicly",
+      "Nothing will, because it was written wide so that both would sign",
+      "Reading the other seven points, because they will fix its real meaning"
     ],
     "correct": 2,
-    "explanation": "There is no score on this one. A form of words that everybody can sign is often a form of words that settles nothing. The vagueness is not a failure in the sentence. It is the reason there was a sentence at all. You are about to read an agreement built the same way, and the question the exam asks is never whether it is true. It is what it was made for.",
+    "explanation": "There is no score on this one. Both men are reading the same eleven words honestly. The line was drafted to be signed, not to be applied, and a line drafted that way settles nothing. You will read a document written the same way in a moment. When the exam asks what a source is worth, it is asking this. Answer only what the words say and you will miss the marks that come from asking what they were for.",
     "noSource": true
   },
   {
     "type": "content",
     "tag": "The turn",
-    "html": "<h2>The word for what you just did</h2><p>You did not ask whether the sentence was true. You asked what it was for, and worked out what that stopped it from saying.</p><p>That is <strong>provenance</strong>: where a source comes from. Who made it, when, and why they made it.</p><p>Paper 1 asks this constantly, in the questions about usefulness and limitations. A source made to end an argument is not the same as one made to record what happened. You get marks for knowing the difference.</p>",
+    "html": "<h2>The word for what you just did</h2><p>You did not ask whether point three was true. You asked what it was for, and worked out what that stopped it from saying.</p><p>That is <strong>provenance</strong>: where a source comes from. Who made it, when, and why they made it.</p><p>Paper 1 asks this constantly, in the questions about usefulness and limitations. A source made to end an argument is not the same as one made to record what happened. You get marks for knowing the difference.</p>",
     "remember": "Ask what a document was for before you ask whether it is true. The purpose sets the limits.",
     "terms": [
       {
@@ -1323,7 +1332,7 @@ const FLOW = [
   {
     "type": "content",
     "tag": "Beyond the exam",
-    "html": "<h2>Wording everyone can sign</h2><p>The habit worth keeping is the one from the note on Monday morning. When an agreement is vague at exactly the point that matters most, that is usually the reason it got agreed.</p><p>You will meet this in contracts, in group work, in politics and in anything where two parties want different things and both need to say yes today.</p><p>So the question to ask of any agreement is not just what it promises. It is who decides, by when, and what happens if nobody does.</p>"
+    "html": "<h2>Wording everyone can sign</h2><p>Think back to the sentence the three of you agreed for Saturday. When an agreement is vague at exactly the point that matters most, that vagueness is usually the reason everybody signed it.</p><p>You will meet this in contracts, in group work, in politics and in anything where two parties want different things and both need to say yes today.</p><p>So the question to ask of any agreement is not just what it promises. It is who decides, by when, and what happens if nobody does.</p>"
   }
 ];
 
@@ -1876,7 +1885,7 @@ function showResults(){
   });
   /* The button at the end of the lesson is the thing that continues. It does
      not point at a control somewhere else on the page. */
-  document.getElementById("finish-btn").addEventListener("click",()=>{ KulaLMS.advance(); });
+  document.getElementById("finish-btn").onclick = ()=>{ KulaLMS.advance(); };
   KulaLMS.completed();
 }
 
